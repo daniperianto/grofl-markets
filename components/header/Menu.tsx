@@ -4,8 +4,10 @@ import useCartService from "@/lib/hooks/useCardStore";
 import {useEffect, useState} from "react";
 import Link from "next/link";
 import {getSession, signIn, signOut, useSession} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 const Menu = () => {
+    const router = useRouter()
     const { items, init } = useCartService()
     const [mounted, setMounted] = useState(false)
     useEffect(() => {
@@ -15,6 +17,10 @@ const Menu = () => {
     const signoutHandler = () => {
         signOut({ callbackUrl: "/signin"})
         init()
+    }
+
+    const signinHandler = () => {
+
     }
 
     const {data: session } = useSession()
@@ -77,7 +83,7 @@ const Menu = () => {
                         <li>
                             <button className={"btn btn-ghost rounded-btn"}
                                     type={"button"}
-                                    onClick={() => signIn}>
+                                    onClick={()=> router.push("/signin")}>
                                 Sign in
                             </button>
                         </li>
