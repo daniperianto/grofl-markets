@@ -1,11 +1,11 @@
-declare module "next-auth" {
-    import {DefaultSession} from "@auth/core/types";
+import NextAuth, { DefaultSession, DefaultUser } from 'next-auth'
 
+declare module 'next-auth' {
     interface Session {
         user: {
             _id?: string | null
             isAdmin?: boolean
-        } & DefaultSession["user"]
+        } & DefaultSession['user']
     }
 
     export interface User extends DefaultUser {
